@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mc DJnalds — Свежие биты. Свежая картошка.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F3EEDD;
+    --ink: #0A0A0A;
+    --yellow: #FFE500;
+    --pink: #FF3864;
+    --teal: #2FD9C4;
+    --white: #FFFFFF;
+    --shadow-off: 7px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--ink); color:var(--yellow);}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  /* shared brutalist utilities */
+  .boxed{
+    border:3px solid var(--ink);
+    box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--ink);
+  }
+  .boxed-sm{
+    border:3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:3px solid var(--ink);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:78px;}
+  .logo-mini{font-family:'Archivo Black'; font-size:20px; letter-spacing:-0.5px;}
+  .logo-mini span{
+    background:var(--pink); color:var(--white); padding:2px 6px; border:2px solid var(--ink);
+    display:inline-block; transform:rotate(-3deg);
+  }
+  .nav-links{display:flex; gap:0; font-family:'IBM Plex Mono'; font-weight:600; font-size:13px; text-transform:uppercase;}
+  .nav-links a{ padding:10px 16px; border-left:2px solid var(--ink); }
+  .nav-links a:hover{ background:var(--yellow); }
+  .nav-cta{
+    background:var(--ink); color:var(--yellow); font-weight:700; font-size:13px;
+    font-family:'IBM Plex Mono'; text-transform:uppercase;
+    padding:12px 20px; border:3px solid var(--ink);
+    box-shadow:4px 4px 0 var(--pink);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .nav-cta:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--pink);}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* HERO */
+  .hero{
+    position:relative; min-height:92vh; display:flex; align-items:center;
+    padding-top:60px; padding-bottom:60px;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 79px, rgba(10,10,10,0.05) 79px 80px),
+      repeating-linear-gradient(0deg, transparent 0 79px, rgba(10,10,10,0.05) 79px 80px),
+      var(--paper);
+  }
+  .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr;} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono'; font-weight:700; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+    background:var(--teal); border:3px solid var(--ink); padding:8px 14px; margin-bottom:24px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+
+  .wordmark{
+    font-family:'Archivo Black'; line-height:0.95;
+    font-size:clamp(40px, 6.6vw, 84px);
+    letter-spacing:-1px;
+  }
+  .wordmark .dj{
+    color:var(--white); background:var(--pink); padding:0 10px; border:4px solid var(--ink);
+    display:inline-block; transform:rotate(-2deg); box-shadow:6px 6px 0 var(--ink);
+  }
+
+  .hero p.lede{
+    margin-top:26px; font-size:18px; line-height:1.6; max-width:480px; font-weight:500;
+  }
+  .hero-ctas{display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--yellow); color:var(--ink); font-weight:700; font-size:15px;
+    padding:16px 28px; border:3px solid var(--ink);
+    box-shadow:6px 6px 0 var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--ink);}
+  .btn-ghost{
+    border:3px solid var(--ink); font-size:15px; padding:16px 26px;
+    font-family:'IBM Plex Mono'; font-weight:700; letter-spacing:0.3px; text-transform:uppercase;
+    background:var(--white);
+    box-shadow:6px 6px 0 var(--teal);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-ghost:hover{transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--teal);}
+
+  /* VINYL — flat sticker style */
+  .vinyl-stage{ position:relative; display:flex; align-items:center; justify-content:center; height:420px; }
+  .vinyl{
+    width:300px; height:300px; border-radius:50%;
+    background: repeating-radial-gradient(circle at center, #1a1a1a 0px, #1a1a1a 3px, #262626 4px, #262626 6px);
+    border:4px solid var(--ink);
+    box-shadow:10px 10px 0 var(--ink);
+    position:relative;
+    animation:spin 6s linear infinite;
+  }
+  .vinyl.paused{animation-play-state:paused;}
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .vinyl .label{
+    position:absolute; inset:0; margin:auto; width:118px; height:118px; border-radius:50%;
+    background:var(--yellow); border:3px solid var(--ink);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .vinyl .label .hole{width:14px; height:14px; border-radius:50%; background:var(--paper); border:2px solid var(--ink);}
+  .vinyl .label span{
+    position:absolute; font-family:'IBM Plex Mono'; font-weight:700; font-size:10px; letter-spacing:1px;
+  }
+  .tonearm{
+    position:absolute; top:-6px; right:20px; width:150px; height:150px; transform-origin:top right;
+    transform:rotate(-18deg); transition:transform .3s ease;
+  }
+  .vinyl-stage:hover .tonearm{transform:rotate(4deg);}
+  .hint{
+    position:absolute; bottom:0; font-family:'IBM Plex Mono'; font-weight:700; font-size:11px;
+    text-align:center; letter-spacing:0.5px; background:var(--white); border:2px solid var(--ink); padding:4px 10px;
+  }
+
+  /* SECTION HEADS */
+  .section{ padding:110px 0; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .tag{
+    display:inline-block; font-family:'IBM Plex Mono'; font-weight:700; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+    background:var(--pink); color:var(--white); padding:6px 12px; border:2px solid var(--ink);
+  }
+  .section-title{
+    font-family:'Archivo Black'; font-size:clamp(28px, 4vw, 42px); margin-top:16px; line-height:1.08;
+    letter-spacing:-0.5px;
+  }
+  .section-sub{ margin-top:16px; font-size:16px; line-height:1.6; font-weight:500; }
+
+  /* MENU / SETLIST */
+  .setlist{
+    background:var(--white); border:4px solid var(--ink); box-shadow:8px 8px 0 var(--ink);
+  }
+  .setlist-row{
+    display:grid; grid-template-columns:50px 1fr auto auto; gap:18px; align-items:center;
+    padding:24px 26px; border-bottom:3px solid var(--ink);
+    transition:background .15s ease;
+  }
+  .setlist-row:last-child{border-bottom:none;}
+  .setlist-row:hover{ background:var(--yellow); }
+  .track-no{ font-family:'Archivo Black'; font-size:20px; }
+  .track-name{ font-weight:700; font-size:17px; }
+  .track-desc{ font-size:13.5px; margin-top:4px; font-weight:500; }
+  .track-tag{
+    font-family:'IBM Plex Mono'; font-weight:700; font-size:11px; padding:5px 10px;
+    border:2px solid var(--ink); background:var(--teal); white-space:nowrap; justify-self:start;
+  }
+  .track-price{ font-family:'IBM Plex Mono'; font-size:17px; font-weight:700;
+    background:var(--ink); color:var(--yellow); padding:6px 10px; }
+
+  /* SECRET MENU / SCRATCH */
+  .secret{
+    background:var(--white); border:4px solid var(--ink); box-shadow:10px 10px 0 var(--pink);
+    padding:52px;
+    display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center;
+  }
+  @media (max-width:840px){ .secret{grid-template-columns:1fr; padding:32px;} }
+  .scratch-pad{
+    position:relative; height:260px; overflow:hidden;
+    background:var(--paper); cursor:grab; user-select:none;
+    display:flex; align-items:center; justify-content:center;
+    border:3px solid var(--ink);
+  }
+  .scratch-pad:active{cursor:grabbing;}
+  .scratch-pad .disc{
+    width:190px; height:190px; border-radius:50%;
+    background: repeating-radial-gradient(circle at center, #1a1a1a 0px, #1a1a1a 3px, #262626 4px, #262626 6px);
+    border:4px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:6px 6px 0 var(--ink);
+  }
+  .scratch-pad .disc .core{
+    width:64px; height:64px; border-radius:50%; background:var(--pink); border:3px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Archivo Black'; font-size:9px; color:var(--white); text-align:center; padding:6px;
+  }
+  .scratch-caption{
+    position:absolute; bottom:14px; font-family:'IBM Plex Mono'; font-weight:700; font-size:11px;
+    letter-spacing:0.5px; background:var(--white); border:2px solid var(--ink); padding:3px 9px;
+  }
+  .reveal{
+    font-family:'Archivo Black'; font-size:20px; color:var(--ink); opacity:0; transform:translateY(8px);
+    transition:opacity .5s ease, transform .5s ease; text-align:center; padding:0 16px;
+  }
+  .reveal.show{opacity:1; transform:translateY(0);}
+  .secret-copy .section-title{margin-top:10px;}
+
+  /* REVIEWS */
+  .flyers{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:900px){ .flyers{grid-template-columns:1fr;} }
+  .flyer{
+    background:var(--white); border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink); padding:28px;
+  }
+  .flyer:nth-child(2){ transform:rotate(-1deg); }
+  .flyer:nth-child(3){ transform:rotate(1deg); }
+  .flyer .stars{ color:var(--ink); background:var(--yellow); display:inline-block; padding:2px 8px; border:2px solid var(--ink); font-size:14px; letter-spacing:2px; margin-bottom:14px; }
+  .flyer p{ font-size:15px; line-height:1.6; font-weight:500; }
+  .flyer .who{ margin-top:18px; font-family:'IBM Plex Mono'; font-weight:700; font-size:12px; }
+
+  /* CTA STRIP */
+  .cta-strip{
+    background:var(--ink); color:var(--paper);
+    border-top:4px solid var(--ink); border-bottom:4px solid var(--ink);
+    padding:80px 0; text-align:center;
+  }
+  .cta-strip .section-title{ margin:0 auto 26px; color:var(--yellow); }
+
+  /* FOOTER */
+  footer{ padding:56px 0 40px; border-top:3px solid var(--ink); }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .foot-brand{ font-family:'Archivo Black'; font-size:16px; }
+  .foot-disclaimer{ max-width:460px; font-size:12.5px; line-height:1.6; font-family:'IBM Plex Mono'; font-weight:500; }
+  .foot-links{ display:flex; gap:0; font-family:'IBM Plex Mono'; font-weight:700; font-size:13px; }
+  .foot-links a{ padding:0 16px; border-left:2px solid var(--ink); }
+  .foot-links a:first-child{ border-left:none; padding-left:0; }
+  .foot-links a:hover{ color:var(--pink); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo-mini">Mc <span>DJ</span>nalds</div>
+    <div class="nav-links">
+      <a href="#menu">Сет-лист</a>
+      <a href="#secret">Секретный трек</a>
+      <a href="#reviews">Отзывы</a>
+    </div>
+    <a href="#menu" class="nav-cta">Заказать сет</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Открыто с полуночи до рассвета</div>
+      <h1 class="wordmark">
+        Mc <span class="dj">DJ</span>nalds
+      </h1>
+      <p class="lede">Забегаловка, где картошку фри жарят под миксы, а бургер собирают в такт битдропу. Никакой связи с известной бургерной империей — только ремикс на жанр фастфуда.</p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn-primary">Смотреть сет-лист</a>
+        <a href="#secret" class="btn-ghost">// найти секретный трек</a>
+      </div>
+    </div>
+    <div class="vinyl-stage">
+      <div class="vinyl" id="heroVinyl">
+        <div class="label">
+          <span>MCDJ · 45RPM</span>
+          <div class="hole"></div>
+        </div>
+      </div>
+      <svg class="tonearm" viewBox="0 0 150 150">
+        <line x1="140" y1="14" x2="30" y2="130" stroke="#0A0A0A" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="140" cy="14" r="9" fill="#F3EEDD" stroke="#0A0A0A" stroke-width="3"/>
+        <rect x="14" y="120" width="26" height="14" transform="rotate(35 27 127)" fill="#FFE500" stroke="#0A0A0A" stroke-width="2"/>
+      </svg>
+      <div class="hint">наведи, чтобы поставить иглу на пластинку</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Сегодняшний сет</div>
+      <h2 class="section-title">Меню, разложенное как трек-лист</h2>
+      <p class="section-sub">Каждый бургер — свой BPM. Чем выше номер трека, тем острее соус.</p>
+    </div>
+    <div class="setlist">
+      <div class="setlist-row">
+        <div class="track-no">01</div>
+        <div>
+          <div class="track-name">Bassline Cheeseburger</div>
+          <div class="track-desc">Двойная котлета, чеддер, соус на бас-гитаре — низкие частоты, высокая сытость.</div>
+        </div>
+        <div class="track-tag">мягкий драп</div>
+        <div class="track-price">890 ₸</div>
+      </div>
+      <div class="setlist-row">
+        <div class="track-no">02</div>
+        <div>
+          <div class="track-name">Vinyl Onion Rings</div>
+          <div class="track-desc">Кольца лука, нарезанные точно как пластинка на 45 оборотов.</div>
+        </div>
+        <div class="track-tag">хрустящий скретч</div>
+        <div class="track-price">540 ₸</div>
+      </div>
+      <div class="setlist-row">
+        <div class="track-no">03</div>
+        <div>
+          <div class="track-name">Drop The Beat Fries</div>
+          <div class="track-desc">Картофель фри с чили-солью, подаётся в момент бит-дропа.</div>
+        </div>
+        <div class="track-tag">острый билд-ап</div>
+        <div class="track-price">460 ₸</div>
+      </div>
+      <div class="setlist-row">
+        <div class="track-no">04</div>
+        <div>
+          <div class="track-name">Encore Milkshake</div>
+          <div class="track-desc">Молочный коктейль на бис — карамель, вафельная крошка, без пауз между глотками.</div>
+        </div>
+        <div class="track-tag">сладкий финал</div>
+        <div class="track-price">620 ₸</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="secret">
+  <div class="wrap">
+    <div class="secret">
+      <div class="scratch-pad" id="scratchPad">
+        <div class="disc" id="scratchDisc">
+          <div class="core">SCRATCH<br>ME</div>
+        </div>
+        <div class="reveal" id="revealText">Secret Track #05 — «Midnight Mayo Melt» 🔓<br><span style="font-family:'IBM Plex Mono'; font-size:13px;">только для тех, кто дослушал сет до конца</span></div>
+        <div class="scratch-caption">потяни диск влево-вправо</div>
+      </div>
+      <div class="secret-copy">
+        <div class="tag">Не в основном меню</div>
+        <h3 class="section-title">Есть один трек, который мы не пишем в меню</h3>
+        <p class="section-sub">Он появляется, только если ты сам его «наскретчишь». Совет диджея: пять быстрых движений туда-обратно — и заказ откроется на кассе кодовым словом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Флаеры с танцпола</div>
+      <h2 class="section-title">Что говорят завсегдатаи</h2>
+    </div>
+    <div class="flyers">
+      <div class="flyer">
+        <div class="stars">★★★★★</div>
+        <p>Пришёл за бургером в 2 ночи, остался до закрытия из-за сета. Картошка фри держит ритм лучше моего диджея.</p>
+        <div class="who">— завсегдатай пятничных смен</div>
+      </div>
+      <div class="flyer">
+        <div class="stars">★★★★★</div>
+        <p>Секретный трек нашла с третьей попытки. Кассир подмигнул и сказал «неплохой скретч». Взяла добавку.</p>
+        <div class="who">— охотница за секретным меню</div>
+      </div>
+      <div class="flyer">
+        <div class="stars">★★★★☆</div>
+        <p>Винтажные виниловые луковые кольца — гениально. Минус звезда только за то, что очередь на бит-дропе длинная.</p>
+        <div class="who">— ночной курьер</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <div class="wrap">
+    <h2 class="section-title">Заведи ночь правильно</h2>
+    <a href="#menu" class="btn-primary">Открыть полный сет-лист</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-brand">Mc DJnalds</div>
+      <p class="foot-disclaimer">Вымышленная закусочная для демонстрации дизайна. Не связана и не аффилирована с какой-либо реальной сетью быстрого питания — любое сходство названий является языковой игрой, а не претензией на бренд.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#menu">Сет-лист</a>
+      <a href="#secret">Секретный трек</a>
+      <a href="#reviews">Отзывы</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const vinyl = document.getElementById('heroVinyl');
+  vinyl.addEventListener('click', () => vinyl.classList.toggle('paused'));
+
+  const pad = document.getElementById('scratchPad');
+  const disc = document.getElementById('scratchDisc');
+  const reveal = document.getElementById('revealText');
+  let dragging = false, lastX = 0, totalScratch = 0, revealed = false, rotation = 0;
+
+  function startDrag(x){ dragging = true; lastX = x; }
+  function endDrag(){ dragging = false; }
+  function moveDrag(x){
+    if(!dragging || revealed) return;
+    const delta = x - lastX;
+    lastX = x;
+    rotation += delta * 0.6;
+    disc.style.transform = `rotate(${rotation}deg)`;
+    totalScratch += Math.abs(delta);
+    if(totalScratch > 500){
+      revealed = true;
+      reveal.classList.add('show');
+      disc.style.opacity = '0.15';
+    }
+  }
+
+  pad.addEventListener('mousedown', e => startDrag(e.clientX));
+  window.addEventListener('mouseup', endDrag);
+  window.addEventListener('mousemove', e => moveDrag(e.clientX));
+
+  pad.addEventListener('touchstart', e => startDrag(e.touches[0].clientX));
+  window.addEventListener('touchend', endDrag);
+  window.addEventListener('touchmove', e => moveDrag(e.touches[0].clientX));
+</script>
+
+</body>
+</html>
